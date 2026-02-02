@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 FsocietyRecon - Advanced Reconnaissance Suite
 Professional cybersecurity reconnaissance tools
@@ -55,7 +55,7 @@ Zetas
     def url_to_ip(self, url):
         """Find real IP address from URL"""
         try:
-            # Clean URL
+            
             if not url.startswith(('http://', 'https://')):
                 url = 'http://' + url
             
@@ -64,11 +64,11 @@ Zetas
             
             print(f"{Colors.YELLOW}[*] Resolving IP address for {hostname}...{Colors.END}")
             
-            # DNS resolution
+          
             ip = socket.gethostbyname(hostname)
             print(f"{Colors.GREEN}[+] {hostname} -> {ip}{Colors.END}")
             
-            # Additional info
+          
             self.get_ip_info(ip)
             return ip
             
@@ -92,7 +92,7 @@ Zetas
     def port_scan(self, target, ports=None):
         """Performs real port scanning"""
         if ports is None:
-            # Most common ports
+      
             ports = [21, 22, 23, 25, 53, 80, 110, 111, 135, 139, 143, 443, 993, 995, 1723, 3306, 3389, 5900, 8080]
         
         print(f"{Colors.YELLOW}[*] Starting port scan on {target}...{Colors.END}")
@@ -120,7 +120,7 @@ Zetas
             except:
                 pass
         
-        # Multi-threaded fast scanning
+     
         threads = []
         for port in ports:
             thread = threading.Thread(target=scan_port, args=(port,))
@@ -164,8 +164,7 @@ Zetas
     def subdomain_finder(self, domain):
         """Subdomain discovery - real results"""
         print(f"{Colors.YELLOW}[*] Starting subdomain scan for {domain}...{Colors.END}")
-        
-        # Common subdomain list
+     
         subdomains = [
             'www', 'mail', 'ftp', 'admin', 'test', 'dev', 'staging', 'api', 'blog',
             'shop', 'forum', 'support', 'help', 'docs', 'cdn', 'static', 'img',
@@ -203,13 +202,12 @@ Zetas
         print(f"{Colors.YELLOW}[*] Vulnerability scan for {target}...{Colors.END}")
         
         vulnerabilities = []
-        
-        # HTTP header check
+    
         try:
             response = requests.get(f"http://{target}", timeout=5)
             headers = response.headers
             
-            # Security headers check
+           
             security_headers = {
                 'X-Frame-Options': 'Clickjacking protection',
                 'X-XSS-Protection': 'XSS protection',
@@ -223,11 +221,10 @@ Zetas
                     vulnerabilities.append(f"Missing security header: {header} ({description})")
                     print(f"{Colors.RED}[-] Missing: {header}{Colors.END}")
             
-            # Server information
             server = headers.get('Server', 'Unknown')
             print(f"{Colors.CYAN}[+] Server: {server}{Colors.END}")
             
-            # Powered-by information
+          
             powered_by = headers.get('X-Powered-By', 'Unknown')
             if powered_by != 'Unknown':
                 print(f"{Colors.CYAN}[+] Powered by: {powered_by}{Colors.END}")
@@ -235,8 +232,7 @@ Zetas
             
         except Exception as e:
             print(f"{Colors.RED}[-] HTTP check failed: {str(e)}{Colors.END}")
-        
-        # Common files check
+       
         common_files = [
             '/robots.txt', '/sitemap.xml', '/.htaccess', '/config.php',
             '/admin', '/admin.php', '/login', '/login.php', '/phpmyadmin',
@@ -300,14 +296,14 @@ Zetas
                 target = input(f"{Colors.CYAN}Enter target (full reconnaissance): {Colors.END}")
                 print(f"{Colors.RED}[!] Starting full reconnaissance...{Colors.END}")
                 
-                # IP discovery
+                
                 ip = self.url_to_ip(target)
                 if ip:
-                    # Port scanning
+                  
                     open_ports = self.port_scan(ip)
-                    # Subdomain discovery
+                 
                     self.subdomain_finder(target)
-                    # Vulnerability scanning
+                    
                     self.vulnerability_scan(target)
                 
             elif choice == "0":
@@ -321,4 +317,5 @@ Zetas
 
 if __name__ == "__main__":
     recon = FsocietyRecon()
+
     recon.main_menu()
