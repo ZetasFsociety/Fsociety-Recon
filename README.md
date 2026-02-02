@@ -13,7 +13,7 @@ Advanced Cybersecurity Reconnaissance Suite
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/FsocietyRecon.git
+git clone https://github.com/ZetasFsociety/Fsociety-Recon.git
 cd FsocietyRecon
 pip install requests
 python fsociety_recon.py
@@ -86,5 +86,6 @@ Enter target: testphp.vulnweb.com
 MIT License - Use responsibly and ethically.
 
 ---
+
 
 *"We are fsociety. We are everywhere."*
